@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../question.dart';
-import '../answer.dart';
+
+import 'quiz.dart';
+import 'result.dart';
 
 void main() => runApp(MyApp());
 
@@ -34,38 +35,13 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(title: Text('My App Bar')),
         body: questionIndex < questions.length
-            ? Quiz(questions: questions, questionIndex: questionIndex)
-            : Center(child: Text('End Quiz')),
+            ? Quiz(
+                questions: questions,
+                questionIndex: questionIndex,
+                answerQuestion: answerQuestion,
+              )
+            : Result(),
       ),
     );
-  }
-}
-
-class Quiz extends StatelessWidget {
-  const Quiz({
-    Key key,
-    @required this.questions,
-    @required this.questionIndex,
-  }) : super(key: key);
-
-  final List<Map<String, Object>> questions;
-  final int questionIndex;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-        children: [
-          Question(
-            questions[questionIndex]['questionText'],
-          ),
-//                  ...(questions[questionIndex]['answers'] as List<String>)
-//                      .map((anwser) {
-//                    return Answer(
-//                      selectedHandler: answerQuestion,
-//                      text: anwser,
-//                    );
-//                  }),
-        ],
-      );
   }
 }
